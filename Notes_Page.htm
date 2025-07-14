@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Class 11 Maths | Chapters</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;600&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+  }
+
+  body {
+    background: linear-gradient(to right, #e0f7fa, #ffffff);
+    min-height: 100vh;
+    position: relative;
+    opacity: 0;
+    animation: pageFadeSlide 1s ease forwards;
+    transform: translateY(40px);
+  }
+
+  @keyframes pageFadeSlide {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  body::before {
+    content: "Developers     Developers     Developers     Developers";
+    position: absolute;
+    top: 30%;
+    left: -10%;
+    font-size: 90px;
+    color: #0077b609;
+    transform: rotate(-30deg);
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  nav {
+    background: linear-gradient(to right, #c2f0ff, #d0f5ff);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #005f73;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  nav .logo {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #0077b6;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin-left: 25px;
+  }
+
+  nav ul li a {
+    color: #0077b6;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #00b4d8;
+    transition: width 0.4s;
+  }
+
+  nav ul li a:hover::after {
+    width: 100%;
+  }
+
+  nav ul li a:hover {
+    color: #00b4d8;
+  }
+
+  .dropdown-container {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    max-width: 600px;
+    margin: 70px auto;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 123, 255, 0.1);
+    z-index: 1;
+    text-align: center;
+  }
+
+  .dropdown-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #0077b6;
+    margin-bottom: 20px;
+  }
+
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .dropdown-button {
+    background: linear-gradient(to right, #00b4d8, #0077b6);
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: 0.8s;
+    box-shadow: 0 8px 25px rgba(0, 183, 255, 0.3);
+    position: relative;
+    outline: none;
+  }
+
+  .dropdown-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 8px #00000037;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+    font-size: 1.3em;
+    pointer-events: none;
+  }
+
+  .dropdown-button.open .arrow {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .dropdown-list {
+    position: relative;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 99;
+  }
+
+  .dropdown-list.active {
+    max-height: 800px;
+    opacity: 1;
+  }
+
+  .dropdown-item {
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1em;
+    font-weight: bolder;
+    color: #0077b6;
+    background: #f9fdff;
+    border-bottom: 1px solid #e2f2f8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-item:hover {
+    background: #e0f7fa;
+    transform: translateX(5px);
+  }
+
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .faqs {
+    max-width: 900px;
+    margin: 260px auto 0 auto;
+    padding: 30px 40px;
+    background: #ffffff4d;
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    box-shadow: 0 12px 40px #0077b61a;
+    color: #005f73;
+  }
+
+  .faqs h1.faqs1 {
+    font-size: 1.9em;
+    color: #002e46;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 2px solid #00b4d8;
+    padding-bottom: 12px;
+  }
+
+  .faq-box {
+    background: #e0f7fa;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 183, 255, 0.15);
+    margin-bottom: 25px;
+    padding: 20px 25px;
+    transition: transform 0.3s ease;
+  }
+
+  .faq-box:hover {
+    transform: translateY(-4px);
+  }
+
+  .faq-question {
+    font-weight: 700;
+    color: #0077b6;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  .faq-answer {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #023e58;
+  }
+.suggestions-section {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 40px 30px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 119, 182, 0.1);
+  text-align: center;
+}
+
+.suggestions-heading {
+  font-size: 1.9em;
+  color: #005f73;
+  margin-bottom: 35px;
+  font-family: 'Orbitron', sans-serif;
+  border-bottom: 2px solid #00b4d8;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.suggestion-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.suggestion-card {
+  background: linear-gradient(to bottom right, #d3f8fdce, #effafc);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 119, 182, 0.08);
+  padding: 20px 25px;
+  width: 290px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-align: left;
+  border: 1px solid #c8f3ff;
+}
+
+.suggestion-card h3 {
+  color: #0077b6;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+
+.suggestions-section span{
+   font-size: 0.9rem;
+   position: relative;
+   bottom: -20px;
+      color: #737373;
+     opacity:0.3;
+      text-align: center;
+}
+
+.suggestion-card p {
+  color: #023e58;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
+.suggestion-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 119, 182, 0.15);
+  border-color: #00b4d8;
+}
+
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 15px;
+    }
+
+    nav .logo {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    nav ul li {
+      margin: 10px 0;
+    }
+
+    .dropdown-container {
+      margin: 30px 20px;
+      padding: 25px 20px;
+    }
+
+    .dropdown-title {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+
+    .dropdown-button {
+      font-size: 1em;
+      padding: 12px 15px;
+      border-radius: 12px;
+    }
+
+    .dropdown-item {
+      font-size: 0.95em;
+      padding: 12px 15px;
+    }
+
+    body::before {
+      font-size: 60px;
+      top: 45%;
+      left: 10%;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">📘 Class 11 Maths</div>
+    <ul>
+      <li><a href="index.htm">Home</a></li>
+      <li><a href="Formula_Page.htm">Formulas</a></li>
+      <li><a href="About_Page.htm">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="dropdown-container">
+    <div class="dropdown-title">📚 Select a Chapter to Explore</div>
+    <div class="custom-dropdown">
+      <button class="dropdown-button" onclick="toggleDropdown(this)" id="dropdownBtn">
+        Choose Chapter
+        <span class="arrow">▼</span>
+      </button>
+      <div class="dropdown-list" id="dropdownList">
+        <div class="dropdown-item" onclick="redirectTo('FileL.htm')">All Chapters</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter1.html')">Chapter 1: Sets</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter2.html')">Chapter 2: Relations & Functions</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter3.html')">Chapter 3: Trigonometric Functions</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter4.html')">Chapter 4: Complex Numbers</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter5.html')">Chapter 5: Linear Inequalities</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter6.html')">Chapter 6: Permutations & Combinations</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter7.html')">Chapter 7: Binomial Theorem</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter8.html')">Chapter 8: Sequences & Series</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter9.html')">Chapter 9: Straight Lines</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter10.html')">Chapter 10: Conic Sections</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter11.html')">Chapter 11: 3D Geometry</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter12.html')">Chapter 12: Limits & Derivatives</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter13.html')">Chapter 13: Statistics</div>
+        <div class="dropdown-item" onclick="redirectTo('chapter14.html')">Chapter 14: Probability</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faqs">
+    <h1 class="faqs1">Frequently Asked Questions on CBSE Class 11 Maths Revision Notes</h1>
+
+    <div class="faq-box">
+      <div class="faq-question">Q1. Can I score well in Class 11 Maths using the CBSE Notes?</div>
+      <div class="faq-answer">Yes, the CBSE Notes for Class 11 Maths are designed using multiple reference books together with internet, which provides good knowledge of basic concepts.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q2. Can I rely on the CBSE Class 11 Maths Notes for exam preparation?</div>
+      <div class="faq-answer">Students can rely on the CBSE Class 11 Maths Notes as it is explained in a simple-to-understand language.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q3. How to answer complex questions using the CBSE Class 11 Maths Notes?</div>
+      <div class="faq-answer">The notes are curated to increase problem-solving skills among students, which is vital from the exam point of view.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q4. How are these notes better than others?</div>
+      <div class="faq-answer">They’re written in simple language, with clean design and hand-drawn diagrams for better understanding.</div>
+    </div>
+
+    <div class="faq-box">
+      <div class="faq-question">Q5. Are all chapters of Class 11 covered?</div>
+      <div class="faq-answer">Yes, all 14 chapters are covered—from Sets to Probability.</div>
+    </div>
+  </div>
+
+ <div class="suggestions-section">
+  <h2 class="suggestions-heading">✨ You Might Also Like</h2>
+  <div class="suggestion-cards">
+    <a href="Landingpage.html" class="suggestion-card">
+      <h3>🚩 Ayodhya Ram Mandir</h3>
+      <p>Explore the divine legacy, architecture & celebration behind Ram Mandir.</p>
+    </a>
+    <a href="AI.html" class="suggestion-card">
+      <h3>🤖 Artificial Intelligence</h3>
+      <p>Dive into the world of intelligent machines, future tech, and innovation.</p>
+    </a>
+    <a href="#" class="suggestion-card">
+      <h3>🎉 Indian Festivals</h3>
+      <p>Celebrate India’s colorful culture through its vibrant festivals.</p>
+    </a>
+  </div>
+  <span>Credit for Above Pages:- Harshit</span>
+</div>
+
+  <script>
+    document.getElementById('dropdownBtn').addEventListener('mousedown', e => {
+      e.preventDefault();
+    });
+
+    function toggleDropdown(btn) {
+      const list = document.getElementById('dropdownList');
+      list.classList.toggle('active');
+      btn.classList.toggle('open');
+    }
+
+    function redirectTo(page) {
+      document.getElementById('dropdownList').classList.remove('active');
+      document.querySelector('.dropdown-button').classList.remove('open');
+      setTimeout(() => {
+        window.location.href = page;
+      }, 100);
+    }
+
+    document.addEventListener('click', function(e) {
+      const btn = document.getElementById('dropdownBtn');
+      const list = document.getElementById('dropdownList');
+
+      if (!btn.contains(e.target) && !list.contains(e.target)) {
+        list.classList.remove('active');
+        btn.classList.remove('open');
+      }
+    });
+
+    document.querySelectorAll('.faq-question').forEach(item => {
+      item.addEventListener('click', () => {
+        const faqItem = item.parentElement;
+        faqItem.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>
