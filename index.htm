@@ -6,6 +6,92 @@
   <title>Class 11 Maths Notes</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;600&display=swap');
+:root {
+      --bg-light: #f0f8ff;
+      --text-light: #1a1a1a;
+      --nav-light: #e0f7ff;
+      --note-light: #ffffff;
+      --link-light: #0077cc;
+      --dropdown-light: #ffffff;
+
+      --bg-dark: #0b0f19;
+      --text-dark: #e6f0ff;
+      --nav-dark: #111827;
+      --note-dark: #1c2431;
+      --link-dark: #4ea1ff;
+      --dropdown-dark: #1a2233;
+
+      --border-radius: 10px;
+      --transition: all 0.3s ease-in-out;
+    }
+/* Loader Styles */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+  font-family: 'JetBrains Mono';
+}
+
+body.loaded #loader {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+.loader-text {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  letter-spacing: 3px;
+  font-family: 'JetBrains Mono';
+  white-space: nowrap;
+  border-right: 2px solid #9c9c9c;
+  overflow: hidden;
+  width: 0;
+animation: blink 0.75s step-end infinite;
+
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 10ch; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+
+.loader-text.glitch {
+  position: relative;
+  animation: glitch-flicker 1s infinite;
+}
+
+@keyframes glitch-flicker {
+  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  20% { text-shadow: -2px 0 lime, 2px 0 magenta; }
+  40% { text-shadow: 0 0 2px white; }
+  60% { text-shadow: 2px 0 magenta, -2px 0 yellow; }
+  80% { text-shadow: -2px 0 red, 2px 0 cyan; }
+  100% { text-shadow: 0 0 2px white; }
+}
+
+
+body:not(.loaded) .animated-wrapper {
+  opacity: 0;
+}
+
+body.loaded .animated-wrapper {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
 
     * {
       margin: 0;
@@ -21,10 +107,16 @@
     }
 
     body {
-      background: linear-gradient(to right, #e0f7fa, #ffffff);
-      color: #333;
+      background: var(--bg-light);
+      color: var(--text-light);
       display: flex;
       flex-direction: column;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+      body.dark-mode {
+      background-color: #161616;
+      color: var(--text-dark);
     }
 
     .animated-wrapper {
@@ -44,11 +136,10 @@
 
     nav {
       background: #ffffff00;
-      padding: 20px;
+      padding: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #005f73;
       position: sticky;
       top: 0;
       z-index: 999;
@@ -60,6 +151,8 @@
       font-size: 1.6em;
       font-weight: bold;
       color: #0077b6;
+      display: inline-block;
+      margin-left: -950px;
     }
 
     nav ul {
@@ -75,6 +168,7 @@
     nav ul li a {
       color: #0077b6;
       text-decoration: none;
+      right: 100px;
       font-weight: 600;
       position: relative;
       transition: color 0.3s ease;
@@ -98,18 +192,16 @@
     nav ul li a:hover {
       color: #00b4d8;
     }
-
+    
     .main {
-       flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 120px; /* added this to avoid overlap with button */
-}
-
-
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 120px;
+    }
 
     .intro {
       width: 100%;
@@ -131,6 +223,33 @@
       max-width: 800px;
       margin: auto;
       color: #003344;
+    }
+
+    .intro-btn {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      background: linear-gradient(to right, #00b4d8, #0077b6);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-top: 5%;
+      cursor: pointer;
+      box-shadow: 0 6px 18px #0000004d;
+      transition: 0.3s;
+    }
+
+    .intro-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 24px #00000066;
+    }
+
+    .math-img {
+      position: absolute;
+      right: 30px;
+      opacity: 0.06;
+      width: 300px;
+      height: auto;
     }
 
     .dropdown {
@@ -193,31 +312,90 @@
       transform: translateY(-10px);
     }
 
-    .intro-btn {
-      padding: 15px 30px;
-      font-size: 1.1em;
-      background: linear-gradient(to right, #00b4d8, #0077b6);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      margin: 5% 0 0 0;
+    .theme-toggle-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+
+    }
+
+    .theme-toggle-switch {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: #0077ff;
+      border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 6px 18px #0000004d;
-      transition: 0.3s;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .intro-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 24px #00000066;
-    }
-
-    .math-img {
+    .theme-toggle-switch::before {
+      content: "";
       position: absolute;
-      right: 30px;
-      opacity: 0.06;
-      width: 300px;
-      height: auto;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    body.dark-mode .theme-toggle-switch {
+      background: #444;
+    }
+
+    body.dark-mode .theme-toggle-switch::before {
+      transform: translateX(30px);
+    }
+
+    .theme-toggle-icon {
+      position: absolute;
+      top: 5px;
+      font-size: 14px;
+      color: #fff;
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .theme-toggle-icon.sun {
+      left: 8px;
+      opacity: 0;
+    }
+
+    .theme-toggle-icon.moon {
+      left: 35px;
+      opacity: 1;
+    }
+
+    body.dark-mode .theme-toggle-icon.sun {
+      opacity: 1;
+    }
+
+    body.dark-mode .theme-toggle-icon.moon {
+      opacity: 0;
+    }
+
+ body.dark-mode select {
+      background-color: var(--dropdown-dark);
+      color: var(--text-dark);
+      border: 1px solid #444;
+    }
+
+
+    .man-img {
+      height: 350px;
+      width: auto;
+      pointer-events: none;
+      opacity: 0.05;
+      position: absolute;
+      margin: 0 0 auto 20px;
+      left: 12%;
+      top: 48%;
+      animation: floaty 4s ease-in-out infinite;
     }
 
     @keyframes floaty {
@@ -225,13 +403,29 @@
       50% { transform: translateY(-10px); }
     }
 
+    .logo-jpg {
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid #00b4d8;
+      box-shadow: 0 4px 12px rgba(0, 180, 216, 0.4);
+      margin-right: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .logo-jpg:hover {
+      transform: scale(1.1) rotate(2deg);
+      box-shadow: 0 6px 20px rgba(0, 180, 216, 0.6);
+    }
+
     footer {
       position: absolute;
       left: 35%;
-       bottom: 0;
+      bottom: 0;
       font-size: 0.9rem;
       color: #888;
-     opacity:0.5;
+      opacity: 0.9;
       text-align: center;
     }
 
@@ -282,62 +476,64 @@
       }
     }
 
-    @media (max-width: 480px) {
-      .intro h1 {
-        font-size: 1.8em;
-      }
+body.dark-mode .math-img,
+body.dark-mode .man-img {
+  filter: brightness(1) contrast(1.1);
+}
 
-      .intro p {
-        font-size: 1em;
-      }
-
-      .dropdown-btn {
-        padding: 8px 12px;
-        font-size: 0.9em;
-      }
-
-      .note-dropdown {
-        right: auto;
-        left: 0;
-        width: 90vw;
-        font-size: 0.85em;
-      }
-
-      .intro-btn {
-        width: 100%;
-        font-size: 1em;
-      }
-
-      .man-img {
-        height: 180px;
-        top: 50%;
-        left: 10%;
-      }
-
-      .math-img {
-        display: none;
-      }
+    body.dark-mode p{
+      color: #e4e4e4;
+    }
+     body.dark-mode .note {
+      background-color: var(--note-dark);
+      box-shadow: 0 4px 12px #ffffff0d;
     }
 
-    .man-img {
-      height: 350px;
-      width: auto;
-      pointer-events: none;
-      opacity: 0.05;
-      position: absolute;
-      margin: 0 0 auto 20px;
-      left: 12%;
-      top: 48%;
-      animation: floaty 4s ease-in-out infinite;
+
+     body.dark-mode nav a {
+      color: var(--link-dark);
+    }
+
+    body.dark-mode .note-dropdown {
+      background-color: #333;
+      color: whitesmoke;
+    }
+
+    body.dark-mode nav{
+      background-color: #1a1a1a;
+      box-shadow: 0 0 6px 0 #cfcfcf;
+    }
+    body.dark-mode .intro h1{
+      color: #00b4d8;
+    }
+    body.dark-mode .intro-btn:hover{
+     box-shadow: 0 10px 24px #dfdfdf81;
+    }
+    .log-name{
+      color: #00315f;
+      font-family:'Eras ITC';
+      font-size: 1.9rem;
+    font-weight: bolder;
+      font-style: italic;
+    }
+    body.dark-mode .log-name{
+      color: #cae1f8;
     }
   </style>
 </head>
 <body>
+<!-- Page Loader -->
+<div id="loader">
+  <div class="loader-text" id="typewriter"></div>
+</div>
+
 
   <div class="animated-wrapper">
-
     <nav>
-      <div class="logo">📘 Class 11 Maths</div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="Logo.JPG" class="logo-jpg" alt="Logo">
+        <div class="log-name">Developers</div>
+      </div>
       <ul>
         <li><a href="#Home">Home</a></li>
         <li><a href="Formula_Page.htm">Formulas</a></li>
@@ -349,7 +545,6 @@
       <section class="intro">
         <h1>Welcome to Class 11 Mathematics Page</h1>
         <p>All NCERT chapters with detailed notes, summaries, and a smart design you’ll love. Start your math journey now!</p>
-
         <button class="intro-btn" onclick="window.location.href='Notes_Page.htm'">🚀 Get Started</button>
         <img class="math-img" src="math-tools.png" alt="Math Illustration">
       </section>
@@ -357,32 +552,80 @@
 
     <img src="man.png" class="man-img" alt="man-pointing">
   </div>
-    
-  <!-- Fixed Note Button -->
-  
 
-  <!-- Footer at bottom -->
-   <br>
-   <br>
-   <br>
-   <br>
-   <br>
-    <div class="dropdown">
+  <div class="dropdown">
     <button class="dropdown-btn">📘 A Note for Reader <span class="arrow">▼</span></button>
     <div class="note-dropdown">
       Hello viewers, welcome to Developers. This is an academic webpage which includes all the important content required for cracking Class 11 Mathematics [CBSE]. In this webpage, you will get key points, important terms, and specially the summary — the whole outcome of the chapter. In short, this webpage will help you revise everything at a glance. Happy learning!
     </div>
   </div>
-   <br>
-   <br>
+
+  <div class="theme-toggle-container">
+    <div class="theme-toggle-switch" id="theme-toggle">
+      <span class="theme-toggle-icon sun">☀️</span>
+      <span class="theme-toggle-icon moon">🌙</span>
+    </div>
+  </div>
+
   <footer>
     BY: DEVELOPERS 💻 | Made with ❤️ for Class 11 Aspirant
     <br>
     Page Designer:- Harshit
   </footer>
-</body>
-</html>
 
+
+
+<script>
+
+  const toggleBtn = document.getElementById("theme-toggle");
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    const isDark = document.body.classList.contains("dark-mode");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+
+  // LOADER GLITCH WITH SOUND
+  window.addEventListener("DOMContentLoaded", () => {
+    const text = "Decrypting Class 11th Success Sequence...";
+    const typeText = document.getElementById("typewriter");
+    const audio = document.getElementById("typeSound");
+    let index = 0;
+
+    typeText.classList.add("glitch");
+    typeText.style.width = "auto"; // Allow JS to grow the text dynamically
+
+    function typeChar() {
+      if (index < text.length) {
+        typeText.textContent += text.charAt(index);
+        try {
+          audio.currentTime = 0;
+          audio.play().catch(() => {}); // avoid blocking if no interaction
+        } catch (e) {}
+        index++;
+        setTimeout(typeChar, 150);
+      } else {
+        setTimeout(() => {
+          document.body.classList.add("loaded");
+        }, 30);
+      }
+    }
+
+    // Ask for audio permission via slight interaction
+    document.body.addEventListener("click", () => {
+      audio.play().catch(() => {});
+    }, { once: true });
+
+    // Start typing after small delay
+    setTimeout(typeChar, 500);
+  });
+
+</script>
 
 </body>
 </html>

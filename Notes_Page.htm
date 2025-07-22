@@ -8,13 +8,120 @@
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;600&display=swap');
 
-  * {
+:root {
+      --bg-light: #f0f8ff;
+      --text-light: #1a1a1a;
+      --nav-light: #e0f7ff;
+      --note-light: #ffffff;
+      --link-light: #0077cc;
+      --dropdown-light: #ffffff;
+
+      --bg-dark: #0b0f19;
+      --text-dark: #e6f0ff;
+      --nav-dark: #111827;
+      --note-dark: #1c2431;
+      --link-dark: #4ea1ff;
+      --dropdown-dark: #1a2233;
+
+      --border-radius: 10px;
+      --transition: all 0.3s ease-in-out;
+    }
+    body::-webkit-scrollbar {
+  display: none;
+}
+
+body.dark-mode {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+body.dark-mode nav {
+  background: #1a1a1a;
+  color: var(--text-dark);
+  box-shadow: 0 1px 1px whitesmoke;
+}
+
+body.dark-mode nav .logo,
+body.dark-mode nav ul li a {
+  color: var(--link-dark);
+}
+
+body.dark-mode nav ul li a:hover,
+body.dark-mode nav ul li a:hover::after {
+  color: rgba(42, 165, 247, 0.836);
+
+}
+
+body.dark-mode .dropdown-container,
+body.dark-mode .faqs,
+body.dark-mode .suggestions-section {
+  background: #4e4e4ea2;
+  color: rgb(0, 174, 255);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+}
+
+body.dark-mode .dropdown-button {
+background: linear-gradient(to right, #00b4d8, #0077b6);
+  color: white;
+}
+
+body.dark-mode .dropdown-list {
+  background: var(--card-dark);
+  box-shadow: 0 8px 25px var(--shadow-dark);
+}
+
+body.dark-mode .dropdown-item {
+  background: #353535;
+  color: var(--link-dark);
+  border-bottom: 1px solid #2c3035;
+}
+
+body.dark-mode .dropdown-item:hover {
+  background: #00416642;
+  color: var(--hover-dark);
+}
+
+body.dark-mode .faq-box {
+  background: rgba(0, 47, 68, 0.267);
+  box-shadow: 0 6px 20px var(--shadow-dark);
+}
+
+body.dark-mode .faq-question {
+  color: var(--link-dark);
+}
+
+body.dark-mode .faq-answer {
+  color: var(--text-dark);
+}
+
+body.dark-mode .suggestion-card {
+  background: linear-gradient(to bottom right, #1a1a1a7c, #2a2a2ac0);
+  border: 1px solid #2e2e2e;
+}
+
+body.dark-mode .suggestion-card h3,
+body.dark-mode .suggestion-card p {
+  color: var(--link-dark);
+}
+
+body.dark-mode .suggestion-card:hover {
+  border-color: var(--hover-dark);
+  box-shadow: 0 12px 35px var(--shadow-dark);
+}
+body.dark-mode .faqs .faqs1,
+body.dark-mode .suggestions-heading{
+  color: rgb(0, 217, 255);
+}
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
   }
 
+  html{
+    scroll-behavior: smooth;
+  }
   html, body {
     overflow-x: hidden;
     width: 100vw;
@@ -27,8 +134,16 @@
     opacity: 0;
     animation: pageFadeSlide 1s ease forwards;
     transform: translateY(40px);
+      overflow-y: scroll; /* allow scroll but hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   }
 
+
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
   @keyframes pageFadeSlide {
     to {
       opacity: 1;
@@ -52,7 +167,7 @@
 
   nav {
     background: linear-gradient(to right, #c2f0ff, #d0f5ff);
-    padding: 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,6 +197,7 @@
 
   nav ul li a {
     color: #0077b6;
+    right: 100px;
     text-decoration: none;
     font-weight: 600;
     position: relative;
@@ -371,18 +487,50 @@
       left: 10%;
     }
   }
+   .logo-jpg {
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid #00b4d8;
+      box-shadow: 0 4px 12px rgba(0, 180, 216, 0.4);
+      margin-right: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .logo-jpg:hover {
+      transform: scale(1.1) rotate(2deg);
+      box-shadow: 0 6px 20px rgba(0, 180, 216, 0.6);
+    }
+     .log-name{
+      color: #00315f;
+      font-family:'Eras ITC';
+      font-size: 1.9rem;
+    font-weight: bolder;
+      font-style: italic;
+    }
+     body.dark-mode .log-name{
+      color: #cae1f8;
+    }
   </style>
 </head>
 <body>
+<!-- rest of HTML remains unchanged -->
 
-  <nav>
-    <div class="logo">📘 Class 11 Maths</div>
-    <ul>
-      <li><a href="index.htm">Home</a></li>
-      <li><a href="Formula_Page.htm">Formulas</a></li>
-      <li><a href="About_Page.htm">About</a></li>
-    </ul>
-  </nav>
+  </style>
+</head>
+<body>
+   <nav>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="Logo.JPG" class="logo-jpg" alt="Logo">
+        <div class="log-name">Developers</div>
+      </div>
+      <ul>
+        <li><a href="index.htm">Home</a></li>
+        <li><a href="Formula_Page.htm">Formulas</a></li>
+        <li><a href="About_Page.htm">About</a></li>
+      </ul>
+    </nav>
 
   <div class="dropdown-container">
     <div class="dropdown-title">📚 Select a Chapter to Explore</div>
@@ -447,7 +595,7 @@
       <h3>🚩 Ayodhya Ram Mandir</h3>
       <p>Explore the divine legacy, architecture & celebration behind Ram Mandir.</p>
     </a>
-    <a href="AI.html" class="suggestion-card">
+    <a href="D:\Docs\Codings\AI (Artificial Intelligence)\AI.html" class="suggestion-card">
       <h3>🤖 Artificial Intelligence</h3>
       <p>Dive into the world of intelligent machines, future tech, and innovation.</p>
     </a>
@@ -494,6 +642,12 @@
         faqItem.classList.toggle('open');
       });
     });
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
   </script>
 </body>
 </html>
